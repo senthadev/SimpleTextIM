@@ -12,7 +12,7 @@ Basic functionality of this server:
 Server and clients communicates based on JSON format.
 Let us look into the communication payloads.
 
-### Client sends payload
+### Client sends following payload
 
 Key  | Allowed values
 ------------- | -------------
@@ -71,7 +71,7 @@ fail  | {error_code: code, reason: reason_text}
 // after user logged in,
 {
 	"command": "message",
-	"messages": [{"user_id": "bob", "message": "where is alice?"}]
+	"messages": [{"user_id": "bob", "message": "where is alice?"}, {}]
 }
 
 // list response
@@ -89,16 +89,15 @@ fail  | {error_code: code, reason: reason_text}
 
 [logo]: https://github.com/senthadev/SimpleTextIM/raw/master/doc/images/SimpleTextIM.png "Design"
 
-### High level responsibility of each components
+### High level responsibility of each modules
 
-*1. Request handler*
+*1. Request Handler*
 
 This module handles the initial login requests. Once the user is validated, it adds an entry in the mapping table with reference to a newly created
-Actor instance and pass the socket object for further communications.
+Actor instance and pass the socket object for further communications. If it's already exists, then socket object is passed for further communications.
+Once login is successful, it submits a message, stating that a new user has logged in, to the Message Handler, to inform all other active users.
 
-And submits a message, stating that a new user has logged in, to the Message Handler to inform all other active users.
-
-*2. Message handler*
+*2. Message Handler*
 
 This module's responsibility is to pass the messages to requested mailbox.
 For example, if the message is for Alice then it calls the Alice's Actor object via looking up the mapping table and passes the messages to it's mailbox.
@@ -108,23 +107,15 @@ If it's a group message, then it passes the messages to all the mailboxes.
 
 This module's responsibility is to communicate with it's client via socket and deliver the messages.
 Also, receives the messages from the client and pass it to the Message Handler for further processing.
-Mailbox is a queue, which stores the messages (payloads) when needs to be processed.
-
+Mailbox is a queue, which stores the messages (payloads) which needs to be processed.
+For example, a private message to Bob.
 
 *4. SimpleTextIMServer*
 
-This module is provide the IM service. Once, after the successful TCP connection, it passes the request to Request Handler for further processing.
+This module is to provide the IM server service. Once, after the successful TCP connection, it passes the request to Request Handler for further processing.
 
 *5. Client*
 
 This is a client module which provides a simple UI to send and receive messages.
 
 
-
-
-**
-
-
-
- 
-	
