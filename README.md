@@ -48,7 +48,7 @@ to  | [user_id, *]
 {
 	"command": "send",
 	"message": "When is the party?",
-	"to", "bob" 
+	"to": "bob" 
 }
 ```
 
@@ -91,4 +91,40 @@ fail  | {error_code: code, reason: reason_text}
 
 ### High level responsibility of each components
 
+*1. Request handler*
 
+This module handles the initial login requests. Once the user is validated, it adds an entry in the mapping table with reference to a newly created
+Actor instance and pass the socket object for further communications.
+
+And submits a message, stating that a new user has logged in, to the Message Handler to inform all other active users.
+
+*2. Message handler*
+
+This module's responsibility is to pass the messages to requested mailbox.
+For example, if the message is for Alice then it calls the Alice's Actor object via looking up the mapping table and passes the messages to it's mailbox.
+If it's a group message, then it passes the messages to all the mailboxes.
+
+*3. Actor*
+
+This module's responsibility is to communicate with it's client via socket and deliver the messages.
+Also, receives the messages from the client and pass it to the Message Handler for further processing.
+Mailbox is a queue, which stores the messages (payloads) when needs to be processed.
+
+
+*4. SimpleTextIMServer*
+
+This module is provide the IM service. Once, after the successful TCP connection, it passes the request to Request Handler for further processing.
+
+*5. Client*
+
+This is a client module which provides a simple UI to send and receive messages.
+
+
+
+
+**
+
+
+
+ 
+	
