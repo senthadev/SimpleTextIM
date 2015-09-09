@@ -43,6 +43,10 @@ public class Actor extends Thread{
 		log.info("Actor["+id+"] initialized from address:" + socket.getInetAddress().getHostAddress());
 	}
 	
+	public String getActorName(){
+		return this.name;
+	}
+	
 	public void setActorName(String name){
 		this.name = name;
 	}
@@ -116,7 +120,7 @@ class Actorlistener implements Runnable{
 	public void run() {
 		try{
 			String s = null;
-			while( (s = actor.getReader().readLine()) != null){
+			while((s = actor.getReader().readLine()) != null){
 				if (s.equals("exit")){
 					break;
 				}
@@ -126,6 +130,7 @@ class Actorlistener implements Runnable{
 			log.log(Level.WARNING, "READING: " + e.toString());
 		}finally{
 			//notify Actor to end the service.
+			actor.dispatch(CommandHandler.createExitMessage());
 			actor.closeListener();
 		}
 	}
