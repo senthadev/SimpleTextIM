@@ -6,6 +6,7 @@ public class Message {
 	public static final int KILL = 2;
 	
 	private int type;
+	private String from;
 	private String message;
 	
 	public Message(String message){
