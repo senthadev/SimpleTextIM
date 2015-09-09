@@ -7,6 +7,45 @@ Basic functionality of this server:
   3. Listing what users are connected
   4. Notify connected users when new users join or logged-in users leave
 
+## How to run it
+
+*Compiling (use java 8)*
+
+> git clone https://github.com/senthadev/SimpleTextIM.git
+
+> cd SimpleTextIM
+
+> mkdir bin
+
+> javac -d bin -sourcepath src src/com/senthadev/core/SimpleIMServer.java
+
+> javac -d bin -sourcepath src src/com/senthadev/client/UIClient.java 
+
+> cd bin
+
+*Starting the server*
+
+// This starts the server in port 1000
+> java com.senthadev.core.SimpleIMServer 10000
+
+*Starting the client*
+
+// This starts a the client UI
+// java com.senthadev.client.UIClient server_host server_port login_name login_password
+java com.senthadev.client.UIClient 127.0.0.1 10000 bob bob_secrect_password
+
+Following commands are available for clients to send messages
+
+command  | Descriptions
+------------- | -------------
+send  | send hello world
+	| This will send a broadcast message, hello world, to all the online clients
+list  | list 
+	| Displays the list of online clients
+private:client  | private:alice ready for pizza?
+	| This will send a private message, ready for pizza?, to client alice.
+
+
 ## Design details
 
 Server and clients communicates based on JSON format.

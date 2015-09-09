@@ -203,7 +203,6 @@ class ChatReader extends Thread{
 		try{
 			String s = null;
 			while( (s = reader.readLine()) != null){
-				System.out.println(s);
 				JsonValue v1 = Json.parse(s);
 				if (v1.isObject()){
 					JsonObject obj1 = v1.asObject();
@@ -238,9 +237,6 @@ class ChatReader extends Thread{
 				else{
 					display.displayResponse(s);
 				}
-				
-				//display.displayResponse(s);
-				
 			}
 		}catch(Exception e){
 			display.displayResponse(e.toString());

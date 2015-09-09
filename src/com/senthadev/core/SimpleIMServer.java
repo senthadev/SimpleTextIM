@@ -7,14 +7,13 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 public class SimpleIMServer {
-	private static final int PORT = 5000;
 	private MessageDispatcher dispatcher;
 	private final static Logger log = Logger.getLogger("SimpleIMServer");
 	
-	public void startServer(){
+	public void startServer(int port){
 		dispatcher = new MessageDispatcher();
-		try(ServerSocket server = new ServerSocket(PORT)){
-			log.info("Simple Text IM server started in port:" + PORT);
+		try(ServerSocket server = new ServerSocket(port)){
+			log.info("Simple Text IM server started in port:" + port);
 			while(true){
 				try{
 					Socket connection = server.accept(); 
@@ -30,7 +29,16 @@ public class SimpleIMServer {
 	}
 	
 	public static void main(String a[]){
+		int port = 5000;
+		if (a.length >= 1){
+			try{
+				port = Integer.parseInt(a[0]);
+			}catch(Exception e){
+				port = 5000;
+			}
+		}
+		
 		SimpleIMServer s = new SimpleIMServer();
-		s.startServer();
+		s.startServer(port);
 	}
 }
