@@ -9,7 +9,7 @@ Basic functionality of this server:
 
 ## How to run it
 
-*Compiling (use java 8)*
+*Compiling and running(use java 8)*
 
 > git clone https://github.com/senthadev/SimpleTextIM.git
 
@@ -17,7 +17,13 @@ Basic functionality of this server:
 
 > mkdir bin
 
+e.g: 
+/Users/sentha/SimpleTextIM/src -> contains the source files (*.java)
+/Users/sentha/SimpleTextIM/bin -> contains the class files (*.class)
+
 > javac -d bin -sourcepath src src/com/senthadev/core/SimpleIMServer.java
+
+e.g: /Users/sentha/SimpleTextIM : javac -d bin -sourcepath src src/com/senthadev/core/SimpleIMServer.java 
 
 > javac -d bin -sourcepath src src/com/senthadev/client/UIClient.java 
 
@@ -25,14 +31,22 @@ Basic functionality of this server:
 
 *Starting the server*
 
+(move to bin directory)
 // This starts the server in port 1000
 > java com.senthadev.core.SimpleIMServer 10000
 
+e.g: /Users/sentha/SimpleTextIM/bin : java com.senthadev.core.SimpleIMServer 10000
+
 *Starting the client*
 
+(move to bin directory)
 // This starts a the client UI
 // java com.senthadev.client.UIClient server_host server_port login_name login_password
-java com.senthadev.client.UIClient 127.0.0.1 10000 bob bob_secrect_password
+
+>java com.senthadev.client.UIClient 127.0.0.1 10000 bob bob_secrect_password
+
+e.g: /Users/sentha/SimpleTextIM/bin : java com.senthadev.client.UIClient 127.0.0.1 10000 bob bob_secrect_password
+
 
 Following commands are available for clients to send messages
 
