@@ -29,15 +29,18 @@ e.g: /Users/sentha/SimpleTextIM : javac -d bin -sourcepath src src/com/senthadev
 
 > cd bin
 
-*Starting the server*
+
+## Starting the server
 
 (move to bin directory)
 // This starts the server in port 1000
+
 > java com.senthadev.core.SimpleIMServer 10000
 
 e.g: /Users/sentha/SimpleTextIM/bin : java com.senthadev.core.SimpleIMServer 10000
 
-*Starting the client*
+
+## Starting the client
 
 (move to bin directory)
 // This starts a the client UI
@@ -48,7 +51,7 @@ e.g: /Users/sentha/SimpleTextIM/bin : java com.senthadev.core.SimpleIMServer 100
 e.g: /Users/sentha/SimpleTextIM/bin : java com.senthadev.client.UIClient 127.0.0.1 10000 bob bob_secrect_password
 
 
-Following commands are available for clients to send messages
+* Following commands are available for clients to send messages *
 
 command  | Descriptions
 ------------- | -------------
@@ -58,7 +61,8 @@ list  | list
 	| Displays the list of online clients
 private:client  | private:alice ready for pizza?
 	| This will send a private message, ready for pizza?, to client alice.
-
+exit  | exit
+	| This will end the session.
 
 ## Design details
 
